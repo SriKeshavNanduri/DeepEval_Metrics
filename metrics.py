@@ -44,64 +44,64 @@ print("Ground Truth ---> " ,ground_truth)
 # # ----------------------------------------------------------------------------
 # # ----------------------------------------------------------------------------
 
-# """
-# AnswerRelevancyMetric --> Measures how relevant the LLM's answer is to the question, based on the retrieved context. 
-# IMPORTANT : 
-# It Does NOT check for the correctness of the answer, but rather its relevance to the question and the context.
+"""
+AnswerRelevancyMetric --> Measures how relevant the LLM's answer is to the question, based on the retrieved context. 
+IMPORTANT : 
+It Does NOT check for the correctness of the answer, but rather its relevance to the question and the context.
 
-# Example 1 : if my llm_answer is "Steve Jobs is not associated with Pixar Studio." then the answer relevancy score will be low because the answer is not relevant to the question and the retrieved context.
-# """
-# llm_answer_test_answer_relevancy_1 = "neil armstrong is the first man to walk on the moon."
-# llm_answer_test_answer_relevancy_2 = "Steve jobs associated with Pixar Studio in 1999."
+Example 1 : if my llm_answer is "Steve Jobs is not associated with Pixar Studio." then the answer relevancy score will be low because the answer is not relevant to the question and the retrieved context.
+"""
+llm_answer_test_answer_relevancy_1 = "neil armstrong is the first man to walk on the moon."
+llm_answer_test_answer_relevancy_2 = "Steve jobs associated with Pixar Studio in 1999."
 
-# print("llm_answer_test_answer_relevancy_1", llm_answer_test_answer_relevancy_1)
-# print("llm_answer_test_answer_relevancy_2", llm_answer_test_answer_relevancy_2)
+print("llm_answer_test_answer_relevancy_1", llm_answer_test_answer_relevancy_1)
+print("llm_answer_test_answer_relevancy_2", llm_answer_test_answer_relevancy_2)
 
-# answer_relevancy_metric = [
-#     AnswerRelevancyMetric(
-#         model="gpt-3.5-turbo",
-#         include_reason=True
-#     ) ] 
+answer_relevancy_metric = [
+    AnswerRelevancyMetric(
+        model="gpt-3.5-turbo",
+        include_reason=True
+    ) ] 
 
-# test_case = LLMTestCase(
-#     input=query,
-#     actual_output=llm_answer_test_answer_relevancy_2, # llm_answer_test_answer_relevancy
-#     expected_output=ground_truth,
-#     retrieval_context=retrieved_results
-# )
+test_case = LLMTestCase(
+    input=query,
+    actual_output=llm_answer_test_answer_relevancy_2, # llm_answer_test_answer_relevancy
+    expected_output=ground_truth,
+    retrieval_context=retrieved_results
+)
 
-# # check on what metric you are looking into among the 5 Deepeval metrics.
-# metric = answer_relevancy_metric
+# check on what metric you are looking into among the 5 Deepeval metrics.
+metric = answer_relevancy_metric
 
 # # # ----------------------------------------------------------------------------
 # # # ----------------------------------------------------------------------------
 
-# """
-# FaithfulnessMetric --> Evaluates whether the actual_output factually aligns with the contents of your retrieval_context 
-# IMPORTANT : 
-# It checks for the correctness of the answer that is reterieved from the retrieved context. It does not check for the relevance of the answer to the question.
+"""
+FaithfulnessMetric --> Evaluates whether the actual_output factually aligns with the contents of your retrieval_context 
+IMPORTANT : 
+It checks for the correctness of the answer that is reterieved from the retrieved context. It does not check for the relevance of the answer to the question.
 
-# Example 1 : if my llm_answer is "Steve Jobs is associated with Pixar Studio and steve jobs worked for apple till 2007." then the answer relevancy score will be low because the answer is not relevant to the question and the retrieved context.
-# """
+Example 1 : if my llm_answer is "Steve Jobs is associated with Pixar Studio and steve jobs worked for apple till 2007." then the answer relevancy score will be low because the answer is not relevant to the question and the retrieved context.
+"""
 
-# llm_answer_test_faithfulness = 'Steve Jobs was not associated with Pixar Studio until 2007' 
-# print("llm_answer_test_faithfulness:", llm_answer_test_faithfulness)
+llm_answer_test_faithfulness = 'Steve Jobs was not associated with Pixar Studio until 2007' 
+print("llm_answer_test_faithfulness:", llm_answer_test_faithfulness)
 
-# faithfulness_metric = [
-#     FaithfulnessMetric(
-#         model="gpt-3.5-turbo",
-#         include_reason=True
-#     )] 
+faithfulness_metric = [
+    FaithfulnessMetric(
+        model="gpt-3.5-turbo",
+        include_reason=True
+    )] 
 
-# test_case = LLMTestCase(
-#     input=query,
-#     actual_output=llm_answer_test_faithfulness, #llm_answer_test_faithfulness
-#     expected_output=ground_truth,
-#     retrieval_context=retrieved_results
-# )
+test_case = LLMTestCase(
+    input=query,
+    actual_output=llm_answer_test_faithfulness, #llm_answer_test_faithfulness
+    expected_output=ground_truth,
+    retrieval_context=retrieved_results
+)
 
-# # check on what metric you are looking into among the 5 Deepeval metrics.
-# metric = faithfulness_metric
+# check on what metric you are looking into among the 5 Deepeval metrics.
+metric = faithfulness_metric
 
 
 # # # ----------------------------------------------------------------------------
@@ -135,53 +135,53 @@ metric = contextual_precision_metrics
 # # # ----------------------------------------------------------------------------
 # # # ----------------------------------------------------------------------------
 
-# # """
-# # ContextualRecallMetric --> measure the quality of your RAG pipeline's retriever by evaluating the extent of which the retrieval_context aligns with the ground_truth answer. 
-# # IMPORTANT : If my contextual recall score is close to 1 means we are getting all the necessary chunks that contain the answer to the question, if my contextual recall score is close to 0 means we are not getting all the necessary chunks that contain the answer to the question.
-# # """
-# # retrieved_results_contextual_recall =["Company in 1976. After the company's board of directors fired him in 1985", "steve becoming Pixar chairman and majority shareholder until 2007. Jobs returned to Apple in 1997 as CEO" ] 
+"""
+ContextualRecallMetric --> measure the quality of your RAG pipeline's retriever by evaluating the extent of which the retrieval_context aligns with the ground_truth answer. 
+IMPORTANT : If my contextual recall score is close to 1 means we are getting all the necessary chunks that contain the answer to the question, if my contextual recall score is close to 0 means we are not getting all the necessary chunks that contain the answer to the question.
+"""
+retrieved_results_contextual_recall =["Company in 1976. After the company's board of directors fired him in 1985", "steve becoming Pixar chairman and majority shareholder until 2007. Jobs returned to Apple in 1997 as CEO" ] 
 
-# # print("retrieved_results_contextual_recall:", retrieved_results_contextual_recall)
+print("retrieved_results_contextual_recall:", retrieved_results_contextual_recall)
 
-# # contextual_recall_metrics = [
-# #     ContextualRecallMetric(
-# #         model="gpt-3.5-turbo",
-# #         include_reason=True
-# #     )]
+contextual_recall_metrics = [
+    ContextualRecallMetric(
+        model="gpt-3.5-turbo",
+        include_reason=True
+    )]
 
-# # test_case = LLMTestCase(
-# #     input=query,
-# #     actual_output=llm_answer, #llm_answer
-# #     expected_output=ground_truth,
-# #     retrieval_context=retrieved_results # retrieved_results_contextual_precision
-# # )
+test_case = LLMTestCase(
+    input=query,
+    actual_output=llm_answer, #llm_answer
+    expected_output=ground_truth,
+    retrieval_context=retrieved_results # retrieved_results_contextual_precision
+)
 
-# # # check on what metric you are looking into among the 5 Deepeval metrics.
-# # metric = contextual_recall_metrics
+# check on what metric you are looking into among the 5 Deepeval metrics.
+metric = contextual_recall_metrics
 
 # # # -----------------------------------------------------------------------------
 # # # ----------------------------------------------------------------------------
 
-# # '''
-# # ContextualRelevancyMetric --> Measures the relevance of the retrieved context to the question and the LLM's answer.
-# # IMPORTANT : If this metric is close to 1 means we are retrieving the most relevant chunks that contain the answer to the question, if this metric is close to 0 means we are not retrieving the relevant chunks that contain the answer to the question.
-# # '''
+'''
+ContextualRelevancyMetric --> Measures the relevance of the retrieved context to the question and the LLM's answer.
+IMPORTANT : If this metric is close to 1 means we are retrieving the most relevant chunks that contain the answer to the question, if this metric is close to 0 means we are not retrieving the relevant chunks that contain the answer to the question.
+'''
 
-# # contextual_relevancy_metrics = [
-# #     ContextualRelevancyMetric(
-# #         threshold=0.7,
-# #         model="gpt-3.5-turbo",
-# #         include_reason=True
-# #     )
-# # ]
-# # test_case = LLMTestCase(
-# #     input=query,
-# #     actual_output=llm_answer, #llm_answer
-# #     expected_output=ground_truth,
-# #     retrieval_context=retrieved_results
-# # )
+contextual_relevancy_metrics = [
+    ContextualRelevancyMetric(
+        threshold=0.7,
+        model="gpt-3.5-turbo",
+        include_reason=True
+    )
+]
+test_case = LLMTestCase(
+    input=query,
+    actual_output=llm_answer, #llm_answer
+    expected_output=ground_truth,
+    retrieval_context=retrieved_results
+)
 
-# # metric = contextual_relevancy_metrics
+metric = contextual_relevancy_metrics
 # # # -----------------------------------------------------------------------------\
 # # # -----------------------------------------------------------------------------
 
